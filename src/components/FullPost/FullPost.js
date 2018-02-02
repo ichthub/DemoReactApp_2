@@ -5,7 +5,7 @@ import './FullPost.css';
 class FullPost extends Component {
 	state ={
 		loadedPost: null,
-		error : false
+		
 	}
 	
 	componentDidUpdate () {
@@ -14,33 +14,22 @@ class FullPost extends Component {
 			
 			if(!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.id)){
 			/*you selected a new post to render*/	
-				axios.get('https://jsonplaceholder.typicode.com/posts/'+this.props.id)
-					.then(response =>{
+				axios.get('/posts/'+this.props.id).then(response =>{
 						//console.log(response);
 						this.setState({loadedPost : response.data});
-				})
-				.catch(error =>{//handle errors
-					//console.log(error);
-					this.setState({error:true});
 				});
-				
 			}
 		}
 	}
 
 	deletePostHandler = () =>{
-		axios.delete('https://jsonplaceholder.typicode.com/posts/'+this.props.id).then(res =>{
+		axios.delete('/posts/'+this.props.id).then(res =>{
 			console.log(res);
 		});
 	}
 		
     render () {
-		let post;
-		if(this.state.error){
-			post = <p style ={{textAlign: 'center'}}>Something went wrong !</p>;
-		}
-		else{
-			post = <p style ={{textAlign: 'center'}}>Please select a Post!</p>;
+		let post= <p style ={{textAlign: 'center'}}>Please select a Post!</p>;
 		
 			if(this.props.id){
 				post = <p style ={{textAlign: 'center'}}>Loading...!</p>;
@@ -57,7 +46,7 @@ class FullPost extends Component {
 					</div>
 
 				);
-		}
+		
 		}
         
        
