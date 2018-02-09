@@ -8,13 +8,13 @@ class FullPost extends Component {
 		
 	}
 	
-	componentDidUpdate () {
-		//will update if it resives new change on props
-		if(this.props.id){
+	componentDidMount () {
+		//console.log(this.props);
+		if(this.props.match.params.id){
 			
 			if(!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.id)){
-			/*you selected a new post to render*/	
-				axios.get('/posts/'+this.props.id).then(response =>{
+			//you selected a new post to render	
+				axios.get('/posts/'+this.props.match.params.id).then(response =>{
 						//console.log(response);
 						this.setState({loadedPost : response.data});
 				});

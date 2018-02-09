@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { Route, NavLink, Switch } from 'react-router-dom';
+
+import './Blog.css';
 import Posts from './Posts/Posts';
 import NewPost from './NewPost/NewPost';
-import './Blog.css';
+import FullPost from './FullPost/FullPost';
+
 
 
 class Blog extends Component {
@@ -15,12 +18,7 @@ class Blog extends Component {
 					<nav>
 						<ul>
 							<li>
-								<NavLink to="/" 
-										exact //to make it limited to home as an active rout
-										activeStyle = {{
-											backgroundColor : 'red',
-											//other stylings goes here
-										}}> Home </NavLink>
+								<NavLink to="/" exact> Home </NavLink>
 							</li>
 							<li>{/*add more prop to = ...*/}
 								<NavLink to={{
@@ -36,8 +34,11 @@ class Blog extends Component {
 			
 				{/*<Route path = "/" exact render={() => <h1>Home</h1>}/>*/}
 				{/*elegant way to do it using component = {reference here} */}
-				<Route path = "/" exact component={Posts} />
-				<Route path = "/new_post" exact component={NewPost} />
+				<Switch> {/*load only one matched url*/}
+					<Route path = "/" exact component={Posts} />
+					<Route path = "/new_post" exact component={NewPost} />
+					<Route path = "/:id" exact component={FullPost} />
+				</Switch>
             </div>
         );
     }
