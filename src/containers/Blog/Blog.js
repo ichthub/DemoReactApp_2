@@ -9,6 +9,9 @@ import NewPost from './NewPost/NewPost';
 
 
 class Blog extends Component {
+	state={
+		auth : false,
+	}
 	
     render () {
 		
@@ -34,10 +37,14 @@ class Blog extends Component {
 			
 				{/*<Route path = "/" exact render={() => <h1>Home</h1>}/>*/}
 				{/*elegant way to do it using component = {reference here} */}
-				<Switch> {/*load only one matched url*/}
-					<Route path = "/new_post" component={NewPost}/>	
+				<Switch> 
+					{/*load only one matched url*/}
+					{this.state.auth ? <Route path = "/new_post" component={NewPost}/> : null}
 					<Route path = "/posts" component={Posts} />
-					<Redirect from = "/" to = "/posts"/>
+					{/*This will mount when we navigate to unknown route*/}
+					<Route render = {() => <h1>Not Found 404</h1>} />
+					{/*<Route path = "/posts" component={Posts} />
+					<Redirect from = "/" to = "/posts"/>*/}
 				</Switch>
             </div>
         );
