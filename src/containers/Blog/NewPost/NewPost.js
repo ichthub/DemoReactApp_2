@@ -12,6 +12,7 @@ class NewPost extends Component {
 		submitted: false,
     }
 	componentDidMount () {
+		//To auth user if not responded to ypur condition -> this.props.history.replace('/posts');
 		console.log(this.props);
 	}
 	
